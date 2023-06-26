@@ -19,6 +19,9 @@
 #if defined(PGR_USB2) || defined(PGR_USB3)
 #include "PGRSource.h"
 #endif // PGR_USB2/3
+#if defined(BASLER_USB3)
+#include "BaslerSource.h"
+#endif //BASLER
 
 /// OpenCV individual includes required by gcc?
 #include <opencv2/highgui.hpp>
@@ -102,12 +105,16 @@ Trackball::Trackball(string cfg_fn)
     /// Open frame source and set fps.
     string src_fn = _cfg("src_fn");
     shared_ptr<FrameSource> source;
-#if defined(PGR_USB2) || defined(PGR_USB3)
+#if defined(PGR_USB2) || defined(PGR_USB3) || defined(BASLER_USB3)
     try {
         if (src_fn.size() > 2) { throw std::exception(); }
         // first try reading input as camera id
         int id = std::stoi(src_fn);
-        source = make_shared<PGRSource>(id);
+#if defined(PGR_USB2) || defined(PGR_USB3)
+        source = make_shared<PGRSource>(id); 
+#elif defined(BASLER_USB3)
+        source = make_shared<BaslerSource>(id);
+#endif // BASLSER
     }
     catch (...) {
         // then try loading as video file
