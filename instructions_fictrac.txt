@@ -1,0 +1,25 @@
+THESE LINES CAN BE COPY/PASTED INTO A COMMAND TERMINAL:
+
+To configure fictrac:
+
+cd C:\Users\Public\fictrac\bin\Release
+configGUI.exe config_fh.txt
+
+
+To run fictrac (prepare to initiate socket connection):
+
+cd C:\Users\Public\fictrac\bin\Release
+fictrac.exe config_fh.txt
+
+
+
+IF WANT TO INITIATE THE SOCKET IN MATLAB:
+
+socket = tcpclient('127.0.0.1', 3000)
+
+
+cd C:\Users\Public\fictrac\bin\Release
+configGUI.exe config_JR.txt
+
+cd C:\Users\Public\fictrac\bin\Release
+fictrac.exe config_JR.txt
